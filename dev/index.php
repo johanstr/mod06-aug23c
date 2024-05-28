@@ -1,26 +1,11 @@
 <?php
-$dbHost = '127.0.0.1';
-$dbName = '2324_wittekip';
-$dbUser = 'root';
-$dbPass = 'root';
+require_once './src/Database/Database.php';
 
-/* Connectie maken met de DB
-   PDO
- */
-$dbConnection = null;
-$dbStatement = null;
 $products = [];
 
-try {
-   $dbConnection = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
+Database::query("SELECT * FROM products");
+$products = Database::getAll();
 
-   $dbStatement = $dbConnection->prepare("SELECT * FROM `products`");
-
-   $dbStatement->execute();
-   $products = $dbStatement->fetchAll(PDO::FETCH_ASSOC);
-} catch(PDOException $e) {
-   echo 'Error: ' . $e->getMessage();
-}
 
 require_once './templates/head.inc.php';
 ?>
@@ -59,7 +44,8 @@ require_once './templates/head.inc.php';
 
                <!-- PRODUCT KAART -->
                <?php foreach ($products as $product) : ?>
-               <a class="product-card uk-card uk-card-home uk-card-default uk-card-small uk-card-hover" href="product.html">
+               <a class="product-card uk-card uk-card-home uk-card-default uk-card-small uk-card-hover"
+                  href="product.php?product_id=<?= $product['id'] ?>">
                   <div class="uk-card-media-top uk-align-center">
                      <img src="<?php echo $product['image'] ?>" alt="Witte kip" class="product-image uk-align-center">
                   </div>
