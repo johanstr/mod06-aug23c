@@ -36,9 +36,12 @@
 
             <ul class="uk-navbar-nav">
                <li class="uk-active"><a href="/"><span uk-icon="icon: home"></span>Home</a></li>
-               <li><a href="login.html"><span uk-icon="icon: sign-in"></span>Inloggen</a></li>
+
+                <?php if(! isset($_SESSION['customer'])): ?>
+                <li><a href="login.php"><span uk-icon="icon: sign-in"></span>Inloggen</a></li>
                <li><a href="register.php"><span uk-icon="icon: file-edit"></span>Registreren</a></li>
-               <li>
+               <?php else: ?>
+                <li>
                   <a href="cart.html">
                      <span uk-icon="icon: cart"></span>
                      Winkelwagen
@@ -46,7 +49,9 @@
                   </a>
                </li>
                <li>
-                  <a href="#"><span uk-icon="icon: user"></span>Welkom Johan <span uk-navbar-parent-icon></span></a>
+                  <a href="#"><span uk-icon="icon: user"></span>
+                      Welkom <?= $_SESSION['customer']['firstname'] ?>
+                      <span uk-navbar-parent-icon></span></a>
                   <div class="uk-navbar-dropdown">
                      <ul class="uk-nav uk-navbar-dropdown-nav">
                         <li class="uk-nav-header">Uw gegevens</li>
@@ -58,10 +63,11 @@
                         <li class="uk-nav-header">Contact</li>
                         <li><a href="#"><span uk-icon="icon: info"></span>Klantenservice</a></li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="#"><span uk-icon="icon: sign-out"></span>Uitloggen</a></li>
+                        <li><a href="src/auth/logout.php"><span uk-icon="icon: sign-out"></span>Uitloggen</a></li>
                      </ul>
                   </div>
                </li>
+                <?php endif; ?>
             </ul>
 
          </div>
