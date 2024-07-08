@@ -13,7 +13,7 @@ require_once './templates/head.inc.php';
 
 <!-- DIT IS DE PAGINA SPECIFIEKE HTML CODE -->
    <main class="uk-container uk-padding">
-<!-- TODO: Onderstaande code pas tonen wanneer er ook echt een melding is -->
+<!-- Onderstaande code pas tonen wanneer er ook echt een melding is -->
     <?php if(hasMessage('login_success')): ?>
         <div class="uk-alert-success" uk-alert>
              <a href class="uk-alert-close" uk-close></a>
